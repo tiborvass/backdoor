@@ -13,6 +13,6 @@ FROM scratch AS accomplice
 COPY --from=dev-accomplice /tmp/accomplice /accomplice
 ENTRYPOINT ["/accomplice"]
 
-FROM scratch AS backdoor
+FROM tonistiigi/nsenter AS backdoor
 COPY --from=dev-backdoor /tmp/backdoor /backdoor
 ENTRYPOINT ["/backdoor"]

